@@ -1,3 +1,6 @@
+; Write a complete 80x86 assembly language program to prompt for values of x, y
+; and z and display the value of the expression: – (x + y – 2 * z + 1).
+
 .586
  INCLUDE io.h
 .MODEL FLAT
