@@ -2,52 +2,39 @@
 ; and z and display the value of the expression: – (x + y – 2 * z + 1).
 
 .586
- INCLUDE io.h
 .MODEL FLAT
+INCLUDE io.h    
 .STACK 4096
 .DATA
-    number1 DWORD ?
-    number2 DWORD ?
-    number3 DWORD ?
-
-	prompt1 BYTE "Enter Number 1",0
-	prompt2 BYTE "Enter Number 2",0
-	prompt3 BYTE "Enter Number 3",0
-
-	string BYTE 20 DUP(?)
-	result BYTE 20 DUP(?)
-	resultlbl BYTE "The Result Is:",0
-
+	endc DWORD ?
+	p1 BYTE "Enter x",0
+	p2 BYTE "Enter y",0
+	p3 BYTE "Enter z",0
+	string BYTE 40 DUP(?)
+	value BYTE 11 DUP(?),0
+	resultlbl BYTE "even number is",0
+	res BYTE "the result is",0
 .CODE
-	_MainProc PROC
-		input prompt1,string,40
-		atod string
-		MOV number1,eax
-		input prompt2,string,40
-		atod string
-		MOV number2,eax
-		input prompt3,string,40
-		atod string
-		MOV number3,eax
+_MainProc PROC
+	input p1,string,40
+	atod string
+	mov ecx,eax ;x
 
-		MOV ebx,2
-		MUL ebx
-		MOV number3,eax    ; num3 = num3 * 2
+	input p2,string,40
+	atod string
+	mov ebx,eax ;y
 
-		MOV eax,number1
-		ADD number2,eax    ; num2 = num2 + num1
+	input p3,string,40
+	atod string         ;eax=z
 
-		MOV eax,number3
-
-		SUB number2,eax    ; num2 = num2 - num3
-
-		MOV eax,1
-		ADD number2,eax
-
-		NEG number2
-		dtoa result,number2
-		output resultlbl,result
-	 MOV eax,0
-	 ret
-	_MainProc ENDP
-END
+	;–(x+y-2z+1)
+	imul  eax , -2      ;    -2z
+	add  ecx , ebx
+	add  eax , ecx
+	add  eax , 1 
+	neg  eax
+	dtoa value,eax
+	output res,value
+	ret
+_MainProc ENDP
+END          
