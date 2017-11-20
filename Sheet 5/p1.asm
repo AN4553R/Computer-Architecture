@@ -6,13 +6,11 @@
 INCLUDE io.h    
 .STACK 4096
 .DATA
-	endc DWORD ?
 	p1 BYTE "Enter x",0
 	p2 BYTE "Enter y",0
 	p3 BYTE "Enter z",0
 	string BYTE 40 DUP(?)
 	value BYTE 11 DUP(?),0
-	resultlbl BYTE "even number is",0
 	res BYTE "the result is",0
 .CODE
 _MainProc PROC
@@ -37,4 +35,4 @@ _MainProc PROC
 	output res,value
 	ret
 _MainProc ENDP
-END          
+END
